@@ -1,42 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Button, Alert } from "react-native";
+import AppFooter from "./components/AppFooter";
+import AppHeader from "./components/AppHeader";
 
+export default function App(): React.JSX.Element {
+  const onClick = () => {
+    Alert.alert("Hi", "Hello React.JS");
+  };
 
-export default function App() {
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    fetch("http://192.168.1.123:3030/product")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setData(data);
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
+  const users = [
+    { id: 1001, name: ",John" },
+    { id: 1002, name: ",Mary" },
+  ];
   return (
     <View style={styles.container}>
-      <Text>Open up FDFD Hacking NASA....{data}</Text>
+      
+      <AppHeader title={"This is header 1"} />
+      <AppHeader title={"This is header 1"} year={2013} />
+
+      <Text>Hello React Native!</Text>
+      {users.map((user, index) => {
+        return (
+          <Text key={user.id}>
+            No. {index + 1} ID: {user.id} Name: {user.name}
+          </Text>
+        );
+      })}
+      <Button
+        title="Click me"
+        onPress={onClick}
+        color="blue"
+        // onPress={() => {
+        //   Alert.alert(""Hi"", ""React Native is Fun!!"");
+        // }}
+      />
+      <AppFooter/>
       <StatusBar style="auto" />
     </View>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
