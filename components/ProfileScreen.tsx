@@ -1,36 +1,28 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Button,
-} from "react-native";
+import {StyleSheet,Text,View,Image,TouchableOpacity,Button} from "react-native";
 import React, { useState } from "react";
 import styles from "../styles/styles";
 
 const ProfileScreen = (): React.JSX.Element => {
-    const Profile1 = require('../assets/phatrakenglish.jpg')
-    const Profile2 = require('../assets/getstudentimage.jpg')
+  const Profile1 = require("../assets/phatrakenglish.jpg");
+  const Profile2 = require("../assets/getstudentimage.jpg");
 
+  const [chk, setChk] = useState(false);
   const [name, setName] = useState("Natrin Thongvichit");
   const [picture, setPicture] = useState(Profile1);
 
   const handleChangeName = () => {
-    setName("New Name");
+    setChk(!chk);
+    setName(chk ? "Potter" : "Natrin Thongvichit");
   };
 
   const handleChangePic = () => {
-    setPicture(Profile2);
+    setPicture((prev:any) => (prev === Profile1 ? Profile2 : Profile1));
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
-        <Image
-          source={picture}
-          style={styles.profileImg}
-        />
+        <Image source={picture} style={styles.profileImg} />
         <View>
           <Text style={styles.profileName}>{name}</Text>
           <Button title="Change Name" onPress={handleChangeName} />
