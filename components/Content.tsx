@@ -3,24 +3,25 @@ import React from "react";
 import { stylesPrac } from "../styles/styles";
 
 type ContentType = {
-  fullname: string;
+  // fullname: string;
   message: string;
+  onButtonClick:() => void; // no return function
 };
 
-const Content = ({ fullname, message }: ContentType) => {
+const Content = ({message,onButtonClick }: ContentType) => {
   const [displayFullname, setDisplayFullname] = React.useState("");
 
-  const showName = (fullname: string) => {
-    setDisplayFullname(fullname)
-    Alert.alert("Hello", "input your fullname: " + fullname);
-  };
+  // const showName = (fullname: string) => {
+  //   setDisplayFullname(fullname)
+  //   Alert.alert("Hello", "input your fullname: " + fullname);
+  // };
 
   return (
     <View style={stylesPrac.container}>
       <View>
         <Text style={stylesPrac.content}>{message}</Text>
         <Text style={stylesPrac.content}>{displayFullname}</Text>
-        <Button title="CLICK ME" onPress={() => showName(fullname)} />
+        <Button title="CLICK ME" onPress={onButtonClick} />
       </View>
     </View>
   );
