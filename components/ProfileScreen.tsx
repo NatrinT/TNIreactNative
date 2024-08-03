@@ -1,6 +1,14 @@
-import {StyleSheet,Text,View,Image,TouchableOpacity,Button} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import React, { useState } from "react";
-import {styles} from "../styles/styles";
+import { styles } from "../styles/styles";
+import Login from "./Login";
 
 const ProfileScreen = (): React.JSX.Element => {
   const Profile1 = require("../assets/phatrakenglish.jpg");
@@ -16,7 +24,7 @@ const ProfileScreen = (): React.JSX.Element => {
   };
 
   const handleChangePic = () => {
-    setPicture((prev:any) => (prev === Profile1 ? Profile2 : Profile1));
+    setPicture((prev: any) => (prev === Profile1 ? Profile2 : Profile1));
   };
 
   return (
@@ -30,6 +38,7 @@ const ProfileScreen = (): React.JSX.Element => {
           <Button title="Change Profile" onPress={handleChangePic} />
         </View>
       </View>
+      <Login />
     </View>
   );
 };

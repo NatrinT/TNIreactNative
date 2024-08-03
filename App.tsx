@@ -1,54 +1,22 @@
-import { StyleSheet, View, Text, TextInput, Alert } from "react-native";
-import React, { useEffect, useState } from "react";
-import AppHeader from "./components/AppHeader";
-import AppFooter from "./components/AppFooter";
-import Content from "./components/Content";
-import ProfileScreen from "./components/ProfileScreen";
-import UseEffectExample from "./components/UseEffectExample";
-import { stylesPrac } from "./styles/styles";
+import { StyleSheet , View, Text } from 'react-native'
+import React from 'react'
+import ProfileScreen from './components/ProfileScreen'
 import { StatusBar } from "expo-status-bar";
+import UseEffectExample from './components/UseEffectExample'
 
-const App = (): React.JSX.Element => {
-  const [fullname, setFullname] = useState("");
-  const [message, setMessage] = useState("Meesage from App.tsx");
-  const [footerMessage, setFooterMessage] = useState(
-    "Thai-Nichi Institute of Technology"
-  );
-
-  useEffect(() => {
-    console.log("Component has mounted");
-  }, []);
-
-  useEffect(() => {
-    console.log("Fullname has changed to : ", fullname);
-  }, [fullname]);
-
-  const handleButtonClick = () => {
-    Alert.alert("Hello",`Input your fullname : ${fullname}`);
-  }
-
+const App = ():React.JSX.Element => {
   return (
     <View style={styles.container}>
-      <AppHeader fullname={fullname} message={message} />
-      {/* <Content fullname={fullname} message={message} /> */}
-      <Content message={message} onButtonClick={handleButtonClick} />
-      <View style={stylesPrac.content}>
-        <TextInput
-          style={stylesPrac.input}
-          placeholder="Enter your fullname"
-          value={fullname}
-          onChangeText={setFullname}
-        />
-      </View>
-      <AppFooter footerMesage={footerMessage} />
-      <StatusBar style="light" />
+      <ProfileScreen/>
+      {/* <UseEffectExample/> */}
+      <StatusBar style="auto" />
     </View>
-  );
-};
-export default App;
+  )
+} 
+export default App
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+  container:{
+    flex:1
+  }
+})
