@@ -1,5 +1,5 @@
-Date: 13-Jul-2024
+Date: 03-Aug-2024
 ID : 2213110451
 Name : Natrin Thongvichit
 AKA: NatrinT
-ClassDetail: React Native Fundamental-Style, Flexbox, React Hook & State
+ClassDetail: Chapter4: React Hook & State (useEffect)
