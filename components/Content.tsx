@@ -1,21 +1,26 @@
 import { StyleSheet, Text, View, Button, Alert } from "react-native";
 import React from "react";
+import { stylesPrac } from "../styles/styles";
 
 type ContentType = {
-    title:string;
-    name:string;
-}
+  fullname: string;
+  message: string;
+};
 
-const showName = (name:string) => {
-    Alert.alert('Hello','input your fullname '+name)
-}
+const Content = ({ fullname, message }: ContentType) => {
+  const [displayFullname, setDisplayFullname] = React.useState("");
 
-const Content = ({title,name}:ContentType) => {
+  const showName = (fullname: string) => {
+    setDisplayFullname(fullname)
+    Alert.alert("Hello", "input your fullname: " + fullname);
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={stylesPrac.container}>
       <View>
-        <Text>{title}</Text>
-        <Button title="CLICK ME" onPress={()=>showName(name)}/>
+        <Text style={stylesPrac.content}>{message}</Text>
+        <Text style={stylesPrac.content}>{displayFullname}</Text>
+        <Button title="CLICK ME" onPress={() => showName(fullname)} />
       </View>
     </View>
   );
@@ -23,10 +28,4 @@ const Content = ({title,name}:ContentType) => {
 
 export default Content;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 7,
-    justifyContent:"center",
-    alignItems:"center"
-  },
-});
+const styles = StyleSheet.create({});

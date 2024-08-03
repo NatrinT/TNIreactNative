@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import App from "../App";
+import { stylesPrac } from "../styles/styles";
 
 type ContentType = {
-    title:string;
+  footerMesage:string;
 }
 
-const AppFooter = ({title}:ContentType) => {
+const AppFooter = ({footerMesage}:ContentType) => {
   return (
-    <View style={styles.footer}>
-      <Text style={styles.footerText}>{title}</Text>
+    <View style={stylesPrac.footer}>
+      <Text style={stylesPrac.footerText}>{footerMesage}</Text>
     </View>
   );
 };
@@ -16,20 +18,5 @@ const AppFooter = ({title}:ContentType) => {
 export default AppFooter;
 
 const styles = StyleSheet.create({
-  footer: {
-    flex:1,
-    backgroundColor: "#f8f8f8",
-    // padding: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    // position: "absolute",
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
-  },
-  footerText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-  },
+  
 });

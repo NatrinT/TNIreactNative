@@ -1,10 +1,10 @@
 import {StyleSheet,Text,View,Image,TouchableOpacity,Button} from "react-native";
 import React, { useState } from "react";
-import styles from "../styles/styles";
+import {styles} from "../styles/styles";
 
 const ProfileScreen = (): React.JSX.Element => {
   const Profile1 = require("../assets/phatrakenglish.jpg");
-  const Profile2 = require("../assets/getstudentimage.jpg");
+  const Profile2 = require("../assets/mongjing.png");
 
   const [chk, setChk] = useState(false);
   const [name, setName] = useState("Natrin Thongvichit");
