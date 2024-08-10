@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import UseEffectExample from './components/UseEffectExample'
 import FlatlistExample from './components/FlatlistExample';
 import FlatlistCallBackend from './components/FlatlistCallBackend';
+import NewsApp from './components/NewsApp';
 
 const App = ():React.JSX.Element => {
   return (
@@ -12,7 +13,8 @@ const App = ():React.JSX.Element => {
       {/* <ProfileScreen/> */}
       {/* <UseEffectExample/> */}
       {/* <FlatlistExample/> */}
-      <FlatlistCallBackend/>
+      {/* <FlatlistCallBackend/> */}
+      <NewsApp/>
       <StatusBar style="auto" />
     </View>
   )
