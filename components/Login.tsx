@@ -27,7 +27,7 @@ const Login = (): React.JSX.Element => {
       errorMessage += "Invalid Email Format\n"
     }
 
-    if (!password) {
+    if (!password)  {
       errorMessage += "Please Enter Password\n";
     } else if (password.length < 6) {
       errorMessage += "Password must be at least 6 characters\n";
