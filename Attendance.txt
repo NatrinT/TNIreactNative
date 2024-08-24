@@ -1,5 +1,5 @@
-Date: 03-Aug-2024
+Date: 24-Aug-2024
 ID : 2213110451
 Name : Natrin Thongvichit
 AKA: NatrinT
-ClassDetail: Chapter4: React Hook & State (useEffect)
+ClassDetail: Making API Requests with Axios / React Native Component: Modal , Image component
