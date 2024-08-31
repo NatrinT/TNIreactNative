@@ -10,10 +10,8 @@ const WeatherApp = () => {
   const renderWeaterComponent = () => {
     if (selectCity === "london") {
       return <WeatherLondon />;
-    } else if (selectCity === "bangkok") {
-      return <WeatherBangkok />;
     } else {
-      return null;
+      return <WeatherBangkok />;
     }
   };
 
