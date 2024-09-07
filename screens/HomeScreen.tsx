@@ -22,7 +22,7 @@ const HomeScreen = (): React.JSX.Element => {
       headerTitleAlign:'center',
       headerLeft:()=>(
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton} >
-          <Item title="menu" iconName="menu" onPress={()=>Alert.alert('Open Menu','Hello react native')}/>
+          <Item title="menu" iconName="menu" onPress={()=>navigation.openDrawer()}/>
         </HeaderButtons>
       ),
       headerRight:()=>(
