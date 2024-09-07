@@ -15,7 +15,6 @@ const CreatePost = ({navigation}:any) => {
       placeholder='Tell Something...' 
       value={text}
       onChangeText={setText}
-      maxLength={40}
       numberOfLines={15}
       />
       <Button title='DONE' onPress={handleNavigate} />
