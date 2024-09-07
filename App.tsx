@@ -51,7 +51,7 @@ const App = (): React.JSX.Element => {
   function ProductStackScreen() {
     return (
       <HomeStack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Product"
         screenOptions={{
           // headerStyle: { backgroundColor: "#20b2aa" },
           // headerTintColor: "white",
@@ -60,7 +60,7 @@ const App = (): React.JSX.Element => {
         }}
       >
         <HomeStack.Screen
-          name="Home"
+          name="Product"
           component={ProductScreen}
           // options={{ title: "หน้าหลัก" }}
         />
