@@ -14,6 +14,7 @@ import AboutScreen from "./screens/AboutScreen";
 import CreatePost from "./screens/CreatePost";
 import MenuScreen from "./screens/MenuScreen";
 import ProductScreen from "./screens/ProductScreen";
+import DetailScreen from "./screens/DetailScreen";
 
 const HomeStack = createNativeStackNavigator();
 const ProductStack = createNativeStackNavigator();
@@ -50,7 +51,7 @@ const App = (): React.JSX.Element => {
 
   function ProductStackScreen() {
     return (
-      <HomeStack.Navigator
+      <ProductStack.Navigator
         initialRouteName="Product"
         screenOptions={{
           // headerStyle: { backgroundColor: "#20b2aa" },
@@ -59,20 +60,15 @@ const App = (): React.JSX.Element => {
           // headerShown:false
         }}
       >
-        <HomeStack.Screen
+        <ProductStack.Screen
           name="Product"
           component={ProductScreen}
-          // options={{ title: "หน้าหลัก" }}
         />
-        <HomeStack.Screen
-          name="About"
-          component={AboutScreen}
-          options={{
-            title: "เกี่ยวกับเรา",
-            headerTitleAlign: "center",
-          }}
+        <ProductStack.Screen
+          name="Detail"
+          component={DetailScreen}
         />
-      </HomeStack.Navigator>
+      </ProductStack.Navigator>
     );
   }
 
