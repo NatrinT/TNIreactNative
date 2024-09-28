@@ -6,7 +6,8 @@ import React, { useCallback, useState } from "react";
 import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HeaderButtonsProvider } from "react-navigation-header-buttons";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer"
+import Ionicon from "react-native-vector-icons/Ionicons";;
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { store } from "./redux-toolkit/store";
@@ -22,12 +23,18 @@ import DetailScreen from "./screens/DetailScreen";
 import LoginScreen from "./screens/LoginScreen";
 import Toast from "react-native-toast-message";
 import { getProfile } from "./services/auth-service";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import CameraScreen from "./screens/CameraScreen";
 
 const HomeStack = createNativeStackNavigator();
 const ProductStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
+const CameraStack = createNativeStackNavigator();
 
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
+
+
 
 const App = (): React.JSX.Element => {
   //ใช้ useAppSelector เพื่อดึง state จาก stroe
@@ -64,6 +71,46 @@ const App = (): React.JSX.Element => {
         <ActivityIndicator size="large" color="blue" />
       </View>
     )
+  }
+
+  function TabContainer() {
+    return (
+      <Tab.Navigator screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName ="";
+          if (route.name === 'HomeStack') {
+            iconName = focused? 'home': 'home-outline';
+          } else if (route.name === 'CameraStack') {
+            iconName = focused? 'camera': 'camera-outline';
+          }
+          
+          return <Ionicon name={iconName} size={size} color={color} />;
+        },tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+        headerShown:false,
+        tabBarActiveBackgroundColor:'#E9EAEC'
+      })}
+      >
+        <Tab.Screen name="HomeStack" component={HomeStackScreen} options={{tabBarLabel:'หน้าหลัก'}} />
+        <Tab.Screen name="CameraStack" component={CameraStackScreen} options={{tabBarLabel:'กล้อง'}} />
+      </Tab.Navigator>
+    )
+  }
+  
+  function CameraStackScreen() {
+    return (
+      <CameraStack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          // headerStyle: { backgroundColor: "#20b2aa" },
+          // headerTintColor: "white",
+          headerTitleStyle: { fontWeight: "bold" },
+          // headerShown:false
+        }}
+      >
+        <CameraStack.Screen name="Camera" component={CameraScreen} options={{title:'camera'}} />
+      </CameraStack.Navigator>
+    );
   }
 
   function HomeStackScreen() {
@@ -132,7 +179,7 @@ const App = (): React.JSX.Element => {
       <HeaderButtonsProvider stackType="native">
         {isLogin ? (
           <Drawer.Navigator screenOptions={{ headerShown: false }} drawerContent={(props) => <MenuScreen {...props} />}>
-            <Drawer.Screen name="HomeStack" component={HomeStackScreen} />
+            <Drawer.Screen name="Home" component={TabContainer} />
             <Drawer.Screen name="ProductStack" component={ProductStackScreen} />
           </Drawer.Navigator>
         ) : (
