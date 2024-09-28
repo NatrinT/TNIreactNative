@@ -1,14 +1,19 @@
 import { View } from "react-native";
-import React from "react";
-import { Text, Card, Input, Button } from "@rneui/base";
+import React, { useState } from "react";
+import { Text, Card, Input, Button, Icon } from "@rneui/base";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
-import { login } from "../services/auth-service";
+import { getProfile, login } from "../services/auth-service";
 import { AxiosError } from "../services/http-service";
 import Toast from "react-native-toast-message";
+import { setIsLogin } from "../auth/auth-slice";
+import { useAppDispatch } from "../redux-toolkit/hooks";
 
 const LoginScreen = (): React.JSX.Element => {
+  const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
+
   // define yub type
   // https://www.youtube.com/watch?v=JhNxzPHipbY
   const schema = yup.object().shape({
@@ -32,25 +37,25 @@ const LoginScreen = (): React.JSX.Element => {
     mode: "all",
   });
 
-  const onLogin = async(data:any) => {
+  const onLogin = async (data: any) => {
     try {
-        const res = await login(data.email,data.password)
-        if (res.status === 200) {
-            Toast.show({type:'success',text1:'Login successfully!!'})
-            // console.log('Login successfully!!');
-        }
-    } catch (error:any) {
-        let err: AxiosError<any> = error;
-        if (err.response?.status===401) {
-            Toast.show({type:'error',text1:err.response.data.message})
-            console.log(err.response.data.message);
-        }else{
-            Toast.show({type:'error',text1:'Cannot connect to server'})
-            console.log("Cannot connect to server");
-        }
-        
+      const res = await login(data.email, data.password);
+      if (res.status === 200) {
+        dispatch(setIsLogin(true));
+        Toast.show({type:'success',text1:'Login successfully!!'})
+        // console.log('Login successfully!!');
+      }
+    } catch (error: any) {
+      let err: AxiosError<any> = error;
+      if (err.response?.status === 401) {
+        Toast.show({ type: "error", text1: err.response.data.message });
+        console.log(err.response.data.message);
+      } else {
+        Toast.show({ type: "error", text1: "Cannot connect to server" });
+        console.log("Cannot connect to server");
+      }
     }
-  }
+  };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -78,8 +83,15 @@ const LoginScreen = (): React.JSX.Element => {
             <Input
               placeholder="Password"
               leftIcon={{ name: "key" }}
-              keyboardType="number-pad"
-              secureTextEntry
+              rightIcon={
+                <Icon
+                  name={showPassword ? "eye" : "eye-off"}
+                  type="feather"
+                  onPress={() => setShowPassword(!showPassword)}
+                />
+              }
+              keyboardType="default"
+              secureTextEntry={!showPassword}
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
@@ -87,7 +99,13 @@ const LoginScreen = (): React.JSX.Element => {
             />
           )}
         />
-        <Button title={"Login"} size="lg" onPress={handleSubmit(onLogin)} loading={isSubmitting} disabled={!isValid} />
+        <Button
+          title={"Login"}
+          size="lg"
+          onPress={handleSubmit(onLogin)}
+          loading={isSubmitting}
+          disabled={!isValid}
+        />
       </Card>
     </View>
   );

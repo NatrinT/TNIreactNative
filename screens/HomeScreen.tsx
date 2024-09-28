@@ -1,9 +1,16 @@
-import { View, Text, Button, StyleSheet, Alert } from "react-native";
+import { View, Button, StyleSheet, Alert } from "react-native";
 import React, { useLayoutEffect } from "react";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { useNavigation } from "@react-navigation/native";
 import AppLogo from "./AppLogo";
 import { HeaderButton,HeaderButtons,Item } from "react-navigation-header-buttons";
+
+import { useAppDispatch, useAppSelector } from "../redux-toolkit/hooks";
+import { selectAuthState, setIsLogin } from "../auth/auth-slice";
+
+import { logout } from "../services/auth-service";
+
+import {Text} from '@rneui/base'
 
 const MaterialHeaderButton = (props: any) => (
   // the `props` here come from <Item ... />​
@@ -14,6 +21,8 @@ const MaterialHeaderButton = (props: any) => (
 const HomeScreen = (): React.JSX.Element => {
 
   const navigation = useNavigation<any>();
+  const dispatch = useAppDispatch()
+  const {profile} = useAppSelector(selectAuthState)
 
   useLayoutEffect(()=>{
     navigation.setOptions({
@@ -27,7 +36,10 @@ const HomeScreen = (): React.JSX.Element => {
       ),
       headerRight:()=>(
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton} >
-          <Item title="logout" iconName="logout" onPress={()=>Alert.alert('Log out','Close Menu')}/>
+          <Item title="logout" iconName="logout" onPress={async()=>{
+            await logout();
+            dispatch(setIsLogin(false))
+          }}/>
         </HeaderButtons>
       )
     })
@@ -50,7 +62,14 @@ const HomeScreen = (): React.JSX.Element => {
   return (
     <View style={styles.container}>
       <MaterialIcon name="home" size={40} color={"pink"} />
-      <Text style={styles.header}>HomeScreen</Text>
+      {profile?(
+        <>
+        <Text h3>Welcome {profile.name}</Text>
+        <Text>{profile.email} I:: {profile.ig} Role: {profile.role}</Text>
+        </>
+      ):
+        null
+      }
       <Button title="ABOUT US" onPress={gotoAbout} />
     </View>
   );
